@@ -9,3 +9,31 @@ output "resource_group_location" {
 output "resource_group_id" {
   value = module.rg.id
 }
+
+output "log_analytics_workspace_name" {
+  value = module.monitoring.log_analytics_workspace_name
+}
+
+output "application_insights_name" {
+  value = module.monitoring.application_insights_name
+}
+
+output "application_insights_connection_string" {
+  value     = module.monitoring.application_insights_connection_string
+  sensitive = true
+}
+
+output "acr_id" {
+  value       = module.acr.id
+  description = "ACR resource ID."
+}
+
+output "acr_name" {
+  value       = module.acr.name
+  description = "ACR name."
+}
+
+output "acr_login_server" {
+  value       = module.acr.login_server
+  description = "ACR login server."
+}
