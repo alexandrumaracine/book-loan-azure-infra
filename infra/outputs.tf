@@ -64,3 +64,9 @@ output "aca_service_name" {
 output "aca_consumer_name" {
   value = module.aca_consumer.name
 }
+
+output "service_fqdn" {
+  description = "Public FQDN for the service Container App"
+  value       = module.aca_service.fqdn
+}
+

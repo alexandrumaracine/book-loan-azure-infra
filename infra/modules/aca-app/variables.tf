@@ -38,3 +38,15 @@ variable "env" {
   type        = map(string)
   default     = {}
 }
+
+variable "ingress" {
+  description = "Ingress configuration for the Container App. Set to null to disable ingress."
+  type = object({
+    external_enabled           = optional(bool)
+    target_port                = number
+    transport                  = optional(string)
+    allow_insecure_connections = optional(bool)
+  })
+  default = null
+}
+

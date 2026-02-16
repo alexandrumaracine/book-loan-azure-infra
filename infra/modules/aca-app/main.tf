@@ -30,4 +30,19 @@ resource "azurerm_container_app" "this" {
       }
     }
   }
+
+  dynamic "ingress" {
+    for_each = var.ingress == null ? [] : [var.ingress]
+    content {
+      external_enabled           = try(ingress.value.external_enabled, true)
+      target_port                = ingress.value.target_port
+      transport                  = try(ingress.value.transport, "auto")
+      allow_insecure_connections = try(ingress.value.allow_insecure_connections, true)
+
+      traffic_weight {
+        latest_revision = true
+        percentage      = 100
+      }
+    }
+  }
 }

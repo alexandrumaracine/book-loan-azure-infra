@@ -51,14 +51,21 @@ module "aca_service" {
   name                = local.aca_service_name
   resource_group_name = module.rg.name
 
-  environment_id      = module.aca_env.id
-  identity_id         = module.uami.id
-  acr_login_server    = module.acr.login_server
+  environment_id   = module.aca_env.id
+  identity_id      = module.uami.id
+  acr_login_server = module.acr.login_server
 
-  image               = var.service_image
-  env                 = {}
+  image = var.service_image
+  env   = {}
 
-   depends_on = [azurerm_role_assignment.uami_acrpull]
+  ingress = {
+    target_port = 8080
+    # external_enabled = true                 # optional
+    # transport = "auto"                      # optional
+    # allow_insecure_connections = true       # optional
+  }
+
+  depends_on = [azurerm_role_assignment.uami_acrpull]
 }
 
 module "aca_consumer" {
@@ -67,15 +74,18 @@ module "aca_consumer" {
   name                = local.aca_consumer_name
   resource_group_name = module.rg.name
 
-  environment_id      = module.aca_env.id
-  identity_id         = module.uami.id
-  acr_login_server    = module.acr.login_server
+  environment_id   = module.aca_env.id
+  identity_id      = module.uami.id
+  acr_login_server = module.acr.login_server
 
-  image               = var.consumer_image
-  env                 = {}
+  image = var.consumer_image
+  env   = {}
 
-   depends_on = [azurerm_role_assignment.uami_acrpull]
+  ingress = null
+
+  depends_on = [azurerm_role_assignment.uami_acrpull]
 }
+
 
 
 
