@@ -50,7 +50,6 @@ module "aca_service" {
 
   name                = local.aca_service_name
   resource_group_name = module.rg.name
-  location            = module.rg.location
 
   environment_id      = module.aca_env.id
   identity_id         = module.uami.id
@@ -67,7 +66,6 @@ module "aca_consumer" {
 
   name                = local.aca_consumer_name
   resource_group_name = module.rg.name
-  location            = module.rg.location
 
   environment_id      = module.aca_env.id
   identity_id         = module.uami.id
