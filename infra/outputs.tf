@@ -52,3 +52,15 @@ output "aca_env_default_domain" {
   value       = module.aca_env.default_domain
   description = "ACA Environment default domain."
 }
+
+output "uami_id" {
+  value = module.uami.id
+}
+
+output "aca_service_name" {
+  value = module.aca_service.name
+}
+
+output "aca_consumer_name" {
+  value = module.aca_consumer.name
+}
