@@ -59,10 +59,10 @@ module "aca_service" {
   env   = {}
 
   ingress = {
-    target_port = 8080
-    # external_enabled = true                 # optional
-    # transport = "auto"                      # optional
-    # allow_insecure_connections = true       # optional
+  external_enabled           = true
+  target_port                = 8080
+  transport                  = "auto"
+  allow_insecure_connections = true
   }
 
   depends_on = [azurerm_role_assignment.uami_acrpull]
