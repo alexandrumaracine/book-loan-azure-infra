@@ -37,3 +37,18 @@ output "acr_login_server" {
   value       = module.acr.login_server
   description = "ACR login server."
 }
+
+output "aca_env_id" {
+  value       = module.aca_env.id
+  description = "ACA Environment resource ID."
+}
+
+output "aca_env_name" {
+  value       = module.aca_env.name
+  description = "ACA Environment name."
+}
+
+output "aca_env_default_domain" {
+  value       = module.aca_env.default_domain
+  description = "ACA Environment default domain."
+}

@@ -22,6 +22,16 @@ module "acr" {
   location            = module.rg.location
 }
 
+module "aca_env" {
+  source = "./modules/aca-env"
+
+  name                       = local.aca_env_name
+  resource_group_name        = module.rg.name
+  location                   = module.rg.location
+  log_analytics_workspace_id = module.monitoring.log_analytics_workspace_id
+}
+
+
 resource "random_string" "suffix" {
   length  = 6
   upper   = false

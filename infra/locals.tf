@@ -5,6 +5,8 @@ locals {
   # If you already have a naming scheme, use that.
   acr_name = "bl${random_string.suffix.result}acr"
 
+  aca_env_name = "bl-${random_string.suffix.result}-aca-env"
+
   tags = {
     project     = var.project_name
     environment = var.environment
