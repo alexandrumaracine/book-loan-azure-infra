@@ -26,3 +26,8 @@ variable "consumer_image" {
   type        = string
 }
 
+variable "suffix" {
+  description = "Stable suffix for naming. Must match existing deployed resources."
+  type        = string
+  default     = "9m2mo5"
+}

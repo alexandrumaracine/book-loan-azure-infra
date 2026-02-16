@@ -85,13 +85,3 @@ module "aca_consumer" {
 
   depends_on = [azurerm_role_assignment.uami_acrpull]
 }
-
-
-
-
-
-resource "random_string" "suffix" {
-  length  = 6
-  upper   = false
-  special = false
-}
