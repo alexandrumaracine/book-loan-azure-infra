@@ -9,10 +9,11 @@ module "monitoring" {
   source              = "./modules/monitoring"
   resource_group_name = module.rg.name
   location            = module.rg.location
-  name_prefix         = "${var.project_name}-${var.environment}"
+  name_prefix         = local.prefix
   retention_in_days   = 30
   tags                = local.tags
 }
+
 
 module "acr" {
   source = "./modules/acr"
@@ -59,11 +60,12 @@ module "aca_service" {
   env   = {}
 
   ingress = {
-  external_enabled           = true
-  target_port                = 8080
-  transport                  = "auto"
-  allow_insecure_connections = true
+    external_enabled           = true
+    target_port                = 8080
+    transport                  = "auto"
+    allow_insecure_connections = true
   }
+
 
   depends_on = [azurerm_role_assignment.uami_acrpull]
 }

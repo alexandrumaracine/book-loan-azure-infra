@@ -7,13 +7,12 @@ variable "location" {
 variable "project_name" {
   description = "Project base name"
   type        = string
-  default     = "bookloan"
+  default     = "book-loan"
 }
 
-variable "environment" {
-  description = "Environment name (dev, test, prod)"
-  type        = string
-  default     = "dev"
+variable "project_code" {
+  type    = string
+  default = "bl"
 }
 
 variable "service_image" {
@@ -26,8 +25,6 @@ variable "consumer_image" {
   type        = string
 }
 
-variable "suffix" {
-  description = "Stable suffix for naming. Must match existing deployed resources."
-  type        = string
-  default     = "9m2mo5"
-}
+variable "subscription_id" { type = string }
+variable "tenant_id"       { type = string }
+variable "client_id"       { type = string }

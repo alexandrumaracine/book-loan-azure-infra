@@ -1,23 +1,32 @@
 locals {
-  resource_group_name = "${var.project_name}-${var.environment}-rg"
+  # Short, stable prefix for all resource names (keep it deterministic)
+  # If var.project_name is "book-loan", you can keep "bl" as a separate var.project_code.
+  prefix = coalesce(try(var.project_code, null), "bl")
 
-  # IMPORTANT:
-  # This must match the already deployed resources in Azure.
-  # Current deployed suffix is: 9m2mo5
-  suffix = "9m2mo5"
+  # Stable RG name (single env)
+  resource_group_name = "${local.prefix}-rg"
 
-  # ACR requires lowercase alphanumeric only
-  acr_name = "bl${local.suffix}acr"
+  # ACR: must be globally unique + lowercase alphanumeric only.
+  # Prefer a deterministic name. If "${local.prefix}acr" is already taken globally,
+  # set var.acr_suffix to something stable like "40200" (or any org-specific fixed suffix).
+  acr_suffix = "x7k9p2"
 
-  aca_env_name = "bl-${local.suffix}-aca-env"
+  acr_name   = local.acr_suffix != "" ? "${local.prefix}acr${local.acr_suffix}" : "${local.prefix}acr"
 
-  uami_name         = "bl-${local.suffix}-uami"
-  aca_service_name  = "bl-${local.suffix}-svc"
-  aca_consumer_name = "bl-${local.suffix}-consumer"
+  # ACA environment + apps + identity (stable, readable)
+  aca_env_name       = "${local.prefix}-aca-env"
+  uami_name          = "${local.prefix}-uami"
+  aca_service_name   = "${local.prefix}-svc"
+  aca_consumer_name  = "${local.prefix}-consumer"
+
+  # Monitoring (optional but common)
+  log_analytics_name = "${local.prefix}-law"
+  appinsights_name   = "${local.prefix}-ai"
 
   tags = {
-    project     = var.project_name
-    environment = var.environment
-    managedBy   = "terraform"
+    project   = var.project_name
+    managedBy = "terraform"
+    # optional: keep a constant if you still want this label
+    environment = "single"
   }
 }
